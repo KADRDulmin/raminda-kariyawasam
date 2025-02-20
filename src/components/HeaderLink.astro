@@ -22,6 +22,9 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
     transition: color 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
+    box-sizing: border-box;
+    white-space: nowrap;
+    width: fit-content;
   }
 
   a::after {
@@ -49,7 +52,19 @@ const isActive = href === pathname || href === "/" + (subpath?.[0] || "");
   @media (max-width: 768px) {
     a {
       width: 100%;
+      font-size: 1.2rem;
+      padding: 1rem 0;
       text-align: center;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    a:last-child {
+      border-bottom: none;
+    }
+
+    a::after {
+      bottom: -2px;
     }
   }
 </style>

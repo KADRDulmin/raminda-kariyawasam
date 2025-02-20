@@ -64,9 +64,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
       }
 
       .hero-text:hover {
-        animation: glitch 2s infinite linear alternate-reverse;
-        font-size: 4.5em; /* Increase font size on hover */
-        transition: font-size 0.3s ease-in-out; /* Smooth transition */
+        animation: glitch 2s infinite alternate-reverse;
       }
 
       .hero-subtitle {
@@ -201,137 +199,43 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         z-index: 2;
       }
 
-      /* Animations */
-      @keyframes glitch {
-        0% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(-20px);
-        }
-        5% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(20px);
-        }
-        10% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(-10px);
-        }
-        15% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(10px);
-        }
-        20% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(-5px);
-        }
-        25% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(5px);
-        }
-        30% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        35% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        40% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        45% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        50% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        55% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        60% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        65% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        70% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        75% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        80% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        85% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        90% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        95% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
-        100% {
-          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
-          transform: translate(0);
-        }
+      .project-card {
+        display: flex;
+        flex-direction: column;
+        padding: 2.5rem;
+        height: 100%;
       }
 
-      @keyframes glitch-1 {
-        0% {
-          clip-path: inset(20% 0 30% 0);
-        }
-        20% {
-          clip-path: inset(65% 0 15% 0);
-        }
-        40% {
-          clip-path: inset(40% 0 43% 0);
-        }
-        60% {
-          clip-path: inset(80% 0 5% 0);
-        }
-        80% {
-          clip-path: inset(10% 0 58% 0);
-        }
-        100% {
-          clip-path: inset(30% 0 35% 0);
-        }
+      .project-tech {
+        color: var(--accent);
+        font-size: 0.9em;
+        margin-bottom: 1rem;
       }
 
-      @keyframes glitch-2 {
-        0% {
-          clip-path: inset(15% 0 40% 0);
-        }
-        20% {
-          clip-path: inset(50% 0 20% 0);
-        }
-        40% {
-          clip-path: inset(20% 0 60% 0);
-        }
-        60% {
-          clip-path: inset(70% 0 10% 0);
-        }
-        80% {
-          clip-path: inset(5% 0 75% 0);
-        }
-        100% {
-          clip-path: inset(60% 0 25% 0);
-        }
+      .project-details {
+        margin: 1rem 0;
+        list-style: none;
+        padding: 0;
       }
 
-      /* Media Queries */
+      .project-details li {
+        position: relative;
+        padding-left: 1.5em;
+        margin-bottom: 0.5em;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .project-details li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      .grid-container.projects {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      }
+
       @media (max-width: 768px) {
         .content-overlay {
           width: 95%;
@@ -348,6 +252,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
         .hero-text {
           font-size: 2.5em;
+        }
+
+        .grid-container.projects {
+          grid-template-columns: 1fr;
         }
       }
 
@@ -404,8 +312,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
       <!-- Hero Section -->
       <section class="parallax-section hero">
         <div class="content-overlay cyber-border">
-          <h1 class="hero-text" data-text="Digital Innovator">
-            Digital Innovator
+          <h1 class="hero-text" data-text="Raminda Kariyawasam">
+            Raminda Kariyawasam
           </h1>
           <p class="hero-subtitle">Engineering the Future of Web Technology</p>
           <div class="tech-stack">
@@ -465,21 +373,100 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
       <section class="parallax-section projects">
         <div class="content-overlay cyber-border">
           <h2 class="section-title">Project Showcase</h2>
-          <div class="grid-container">
-            <div class="card cyber-border">
-              <h3>Project Alpha</h3>
-              <p>Cloud-native microservices architecture</p>
+          <div class="grid-container projects">
+            <!-- Add new project card before existing cards -->
+            <div class="card cyber-border project-card">
+              <h3>Dr. Care</h3>
+              <div class="project-tech">PHP, MySQL, JavaScript</div>
+              <ul class="project-details">
+                <li>
+                  Complete healthcare management system with patient profiles
+                </li>
+                <li>Medical history tracking and health record management</li>
+                <li>Role-based access control for doctors and staff</li>
+              </ul>
               <div class="tech-stack">
-                <span class="tech-tag">Kubernetes</span>
-                <span class="tech-tag">Go</span>
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">JavaScript</span>
               </div>
             </div>
-            <div class="card cyber-border">
-              <h3>Project Beta</h3>
-              <p>Real-time data visualization platform</p>
+
+            <div class="card cyber-border project-card">
+              <h3>Green Supermarket</h3>
+              <div class="project-tech">Java, JSP, MySQL, Servlets</div>
+              <ul class="project-details">
+                <li>E-commerce platform with advanced transaction handling</li>
+                <li>
+                  Implemented collision prevention for simultaneous purchases
+                </li>
+                <li>Secure user authentication and session management</li>
+              </ul>
               <div class="tech-stack">
-                <span class="tech-tag">D3.js</span>
-                <span class="tech-tag">WebSocket</span>
+                <span class="tech-tag">Java</span>
+                <span class="tech-tag">JSP</span>
+                <span class="tech-tag">MySQL</span>
+              </div>
+            </div>
+
+            <div class="card cyber-border project-card">
+              <h3>Acceleration-Based Authentication</h3>
+              <div class="project-tech">MATLAB, Neural Networks</div>
+              <ul class="project-details">
+                <li>Biometric authentication using neural networks</li>
+                <li>Advanced feature engineering & hyperparameter tuning</li>
+                <li>Performance evaluation using EER, FAR, and AUC metrics</li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech-tag">MATLAB</span>
+                <span class="tech-tag">Neural Networks</span>
+                <span class="tech-tag">ML</span>
+              </div>
+            </div>
+
+            <div class="card cyber-border project-card">
+              <h3>Green Eats</h3>
+              <div class="project-tech">C#, .NET</div>
+              <ul class="project-details">
+                <li>Food ordering system with secure authentication</li>
+                <li>Menu management and order processing</li>
+                <li>Real-time order tracking and notifications</li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech-tag">C#</span>
+                <span class="tech-tag">.NET</span>
+                <span class="tech-tag">SQL</span>
+              </div>
+            </div>
+
+            <div class="card cyber-border project-card">
+              <h3>LiteraNet</h3>
+              <div class="project-tech">MEAN Stack, Docker</div>
+              <ul class="project-details">
+                <li>Full-stack library management system</li>
+                <li>Containerized deployment with Docker</li>
+                <li>Scalable architecture and real-time updates</li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech-tag">MongoDB</span>
+                <span class="tech-tag">Express</span>
+                <span class="tech-tag">Angular</span>
+                <span class="tech-tag">Node.js</span>
+              </div>
+            </div>
+
+            <div class="card cyber-border project-card">
+              <h3>Bus Black Box System</h3>
+              <div class="project-tech">Flutter, C++, IoT</div>
+              <ul class="project-details">
+                <li>Real-time bus tracking and safety monitoring</li>
+                <li>Incident reporting and hazard management</li>
+                <li>IoT integration for data collection</li>
+              </ul>
+              <div class="tech-stack">
+                <span class="tech-tag">Flutter</span>
+                <span class="tech-tag">C++</span>
+                <span class="tech-tag">IoT</span>
               </div>
             </div>
           </div>

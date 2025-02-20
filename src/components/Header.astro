@@ -39,15 +39,19 @@ import { SITE_TITLE } from "../consts";
     background: var(--glass-background);
     backdrop-filter: blur(10px);
     border-bottom: var(--glass-border);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .nav-container {
-    max-width: var(--max-width, 1200px);
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1rem var(--container-padding);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   /* Logo Styles */
@@ -171,22 +175,53 @@ import { SITE_TITLE } from "../consts";
       display: block;
     }
 
+    .nav-container {
+      padding: 0.75rem var(--container-padding);
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+    }
+
     .nav-links {
       display: none;
-      position: absolute;
-      top: 100%;
+      position: fixed;
+      top: 60px;
       left: 0;
       right: 0;
-      background: rgba(8, 9, 12, 0.95);
+      bottom: 0;
+      background: var(--glass-background);
       backdrop-filter: blur(10px);
       flex-direction: column;
-      padding: 2rem;
-      gap: 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem var(--container-padding);
+      gap: 2rem;
+      border-top: var(--glass-border);
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      overflow-y: auto;
     }
 
     .nav-links[data-visible="true"] {
       display: flex;
+      transform: translateX(0);
+    }
+
+    .nav-links a {
+      font-size: 1.2rem;
+      padding: 1rem 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .cta-button {
+      width: auto !important;
+      margin: 1rem auto;
+    }
+
+    .mobile-nav-toggle {
+      position: relative;
+      z-index: 2000;
+      margin-right: 0.5rem;
     }
 
     .mobile-nav-toggle[aria-expanded="true"] .hamburger {
@@ -219,10 +254,18 @@ import { SITE_TITLE } from "../consts";
   // Navigation Toggle Logic
   const navToggle = document.querySelector(".mobile-nav-toggle");
   const primaryNav = document.querySelector("#primary-navigation");
+  const body = document.querySelector("body");
 
   navToggle?.addEventListener("click", () => {
     const isVisible = primaryNav?.hasAttribute("data-visible");
     primaryNav?.toggleAttribute("data-visible");
     navToggle?.setAttribute("aria-expanded", String(!isVisible));
+
+    // Toggle body scroll
+    if (!isVisible) {
+      body?.style.setProperty("overflow", "hidden");
+    } else {
+      body?.style.removeProperty("overflow");
+    }
   });
 </script>
