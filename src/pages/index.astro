@@ -1,50 +1,491 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      /* Layout & Structure */
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      main {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        background: var(--main-gradient);
+      }
+
+      /* Hero Section */
+      .hero-text {
+        font-size: 4em;
+        font-weight: 800;
+        color: #fff;
+        text-shadow: 0 0 10px var(--accent);
+        margin-bottom: 0.5em;
+        position: relative;
+        animation: none; /* Remove default animation */
+      }
+
+      .hero-text::before,
+      .hero-text::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: none;
+        color: var(--accent);
+      }
+
+      .hero-text::before {
+        left: -2px;
+        text-shadow: 2px 0 var(--accent);
+        animation: glitch-1 2s infinite linear alternate-reverse;
+      }
+
+      .hero-text::after {
+        left: 2px;
+        text-shadow: -2px 0 var(--accent-dark);
+        animation: glitch-2 3s infinite linear alternate-reverse;
+      }
+
+      .hero-text:hover {
+        animation: glitch 2s infinite linear alternate-reverse;
+        font-size: 4.5em; /* Increase font size on hover */
+        transition: font-size 0.3s ease-in-out; /* Smooth transition */
+      }
+
+      .hero-subtitle {
+        color: var(--accent);
+        font-size: 1.5em;
+        margin-bottom: 2em;
+        text-shadow: 0 0 5px var(--accent);
+      }
+
+      /* Section Styles */
+      .section-content {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        opacity: 1; /* Change from 0 to 1 */
+        transform: none; /* Remove initial transform */
+        transition: all 0.6s ease-out;
+        background: var(--glass-background);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        border: var(--glass-border);
+        box-shadow: var(--neon-glow);
+      }
+
+      .section-content.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .section-content .section-title {
+        color: #fff;
+        text-shadow: 0 0 10px var(--accent);
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin: 2rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: var(--cyber-gradient);
+      }
+
+      .parallax-section {
+        min-height: 100vh;
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 2rem 0;
+      }
+
+      .parallax-section.hero {
+        background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80");
+      }
+
+      .parallax-section.projects {
+        background-image: url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80");
+      }
+
+      .content-overlay {
+        width: 90%;
+        max-width: 1200px;
+        padding: 4rem 2rem;
+      }
+
+      /* Grid & Cards */
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        padding: 1rem;
+        perspective: 1000px;
+      }
+
+      .card {
+        transform-style: preserve-3d;
+        transition: transform 0.5s ease;
+        background: rgba(8, 9, 12, 0.95);
+        border: 1px solid var(--accent);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+      }
+
+      .card:hover {
+        transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+      }
+
+      .interactive-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Add container for better spacing */
+      .content-container {
+        padding: 4rem 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 32, 64, 0.9)
+        );
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Animations */
+      @keyframes glitch {
+        0% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(-20px);
+        }
+        5% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(20px);
+        }
+        10% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(-10px);
+        }
+        15% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(10px);
+        }
+        20% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(-5px);
+        }
+        25% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(5px);
+        }
+        30% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        35% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        40% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        45% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        50% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        55% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        60% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        65% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        70% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        75% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        80% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        85% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        90% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        95% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+        100% {
+          clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
+          transform: translate(0);
+        }
+      }
+
+      @keyframes glitch-1 {
+        0% {
+          clip-path: inset(20% 0 30% 0);
+        }
+        20% {
+          clip-path: inset(65% 0 15% 0);
+        }
+        40% {
+          clip-path: inset(40% 0 43% 0);
+        }
+        60% {
+          clip-path: inset(80% 0 5% 0);
+        }
+        80% {
+          clip-path: inset(10% 0 58% 0);
+        }
+        100% {
+          clip-path: inset(30% 0 35% 0);
+        }
+      }
+
+      @keyframes glitch-2 {
+        0% {
+          clip-path: inset(15% 0 40% 0);
+        }
+        20% {
+          clip-path: inset(50% 0 20% 0);
+        }
+        40% {
+          clip-path: inset(20% 0 60% 0);
+        }
+        60% {
+          clip-path: inset(70% 0 10% 0);
+        }
+        80% {
+          clip-path: inset(5% 0 75% 0);
+        }
+        100% {
+          clip-path: inset(60% 0 25% 0);
+        }
+      }
+
+      /* Media Queries */
+      @media (max-width: 768px) {
+        .content-overlay {
+          width: 95%;
+          padding: 2rem 1rem;
+        }
+
+        .section-content {
+          padding: 4rem 1rem;
+        }
+
+        .grid-container {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-text {
+          font-size: 2.5em;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-text,
+        .hero-text::before,
+        .hero-text::after,
+        .card {
+          animation: none;
+          transform: none;
+        }
+      }
+    </style>
+
+    <script>
+      // Interactive Features
+      document.addEventListener("astro:page-load", () => {
+        // Section Visibility
+        const setupSectionObserver = () => {
+          const sections = document.querySelectorAll(".section-content");
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("visible");
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+
+          sections.forEach((section) => observer.observe(section));
+        };
+
+        // Background Effects
+        const setupBackgroundEffect = () => {
+          const bg = document.querySelector(".interactive-bg") as HTMLElement;
+          document.addEventListener("mousemove", (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            bg.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+          });
+        };
+
+        setupSectionObserver();
+        setupBackgroundEffect();
+      });
+    </script>
+  </head>
+  <body>
+    <div class="interactive-bg"></div>
+    <Header />
+    <main>
+      <!-- Hero Section -->
+      <section class="parallax-section hero">
+        <div class="content-overlay cyber-border">
+          <h1 class="hero-text" data-text="Digital Innovator">
+            Digital Innovator
+          </h1>
+          <p class="hero-subtitle">Engineering the Future of Web Technology</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">Node.js</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">AWS</span>
+            <span class="tech-tag">Docker</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tech Arsenal Section -->
+      <div class="content-container">
+        <section class="section-content">
+          <div style="position: relative; z-index: 2;">
+            <h2 class="section-title">Tech Arsenal</h2>
+            <div class="grid-container">
+              <div class="card cyber-border">
+                <h3>Frontend Development</h3>
+                <p>
+                  Building responsive and performant web applications using
+                  modern frameworks and tools.
+                </p>
+                <div class="tech-stack">
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">Vue</span>
+                  <span class="tech-tag">Next.js</span>
+                </div>
+              </div>
+              <div class="card cyber-border">
+                <h3>Backend Architecture</h3>
+                <p>
+                  Designing scalable server-side solutions and RESTful APIs.
+                </p>
+                <div class="tech-stack">
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">MongoDB</span>
+                </div>
+              </div>
+              <div class="card cyber-border">
+                <h3>DevOps & Cloud</h3>
+                <p>Implementing CI/CD pipelines and cloud infrastructure.</p>
+                <div class="tech-stack">
+                  <span class="tech-tag">AWS</span>
+                  <span class="tech-tag">Docker</span>
+                  <span class="tech-tag">GitHub Actions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Project Showcase Section -->
+      <section class="parallax-section projects">
+        <div class="content-overlay cyber-border">
+          <h2 class="section-title">Project Showcase</h2>
+          <div class="grid-container">
+            <div class="card cyber-border">
+              <h3>Project Alpha</h3>
+              <p>Cloud-native microservices architecture</p>
+              <div class="tech-stack">
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">Go</span>
+              </div>
+            </div>
+            <div class="card cyber-border">
+              <h3>Project Beta</h3>
+              <p>Real-time data visualization platform</p>
+              <div class="tech-stack">
+                <span class="tech-tag">D3.js</span>
+                <span class="tech-tag">WebSocket</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>
