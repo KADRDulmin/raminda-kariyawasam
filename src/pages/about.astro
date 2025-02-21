@@ -20,15 +20,22 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         margin: 0 auto;
         padding: 2rem;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .left-column, .right-column {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
       }
 
       .profile-section {
         position: relative;
         perspective: 1000px;
         transform-style: preserve-3d;
+        margin-bottom: 2rem;
       }
 
       .profile-wrapper {
@@ -153,7 +160,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
       @media (max-width: 768px) {
         .profile-image {
-          height: 33rem;
+          height: 35rem;
         }
       }
 
@@ -259,6 +266,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         background: rgba(0, 255, 255, 0.1);
         transform: translateY(-3px);
       }
+      .bio-section1 {
+        display: none;
+      }
 
       @keyframes float {
         0%,
@@ -293,24 +303,46 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
       }
 
       @media (max-width: 968px) {
+
         .about-container {
           grid-template-columns: 1fr;
+        }
+
+        .skills-container {
+          grid-template-columns: 1fr;
+        }
+
+        .left-column, .right-column {
           gap: 2rem;
         }
 
-        .profile-section {
-          max-width: 400px;
-          margin: 0 auto;
+        .bio-section {
+          display: none; /* Hide in mobile */
         }
+
+        .bio-section1 {
+          display: block; /* Show in mobile */
+          margin-bottom: 2rem;
+        }
+
+
       }
 
       @media (max-width: 480px) {
+        .bio-section {
+        display: none;
+      }
         .about-container {
           padding: 1rem;
         }
 
-        .section-title {
+        .section-title1 {
+          display: none;
           font-size: 2rem;
+        }
+
+        .bio1{
+          display: none;
         }
 
         .contact-info {
@@ -320,12 +352,20 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         .skills-grid {
           grid-template-columns: repeat(2, 1fr);
         }
+        .bio-section {
+          display: none;
+        }
+
+        .bio-section1 {
+          display: block;
+          margin-bottom: 2rem;
+        }
       }
 
       .skills-container {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
         margin: 2rem 0;
       }
 
@@ -335,6 +375,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         padding: 1.5rem;
         border: 1px solid rgba(0, 255, 255, 0.1);
         transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
       }
 
       .skill-category:hover {
@@ -381,176 +424,194 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     <Header />
     <main>
       <div class="about-container">
-        <div class="profile-section" data-aos="fade-right">
-          <div class="profile-wrapper">
-            <div class="profile-glow"></div>
-            <div class="profile-frame"></div>
-            <div class="profile-scanner"></div>
-            <img
-              src="/raminda-kariyawasam/Avatar.jpg"
-              alt="Raminda Kariyawasam"
-              class="profile-image"
-            />
+        <div class="left-column">
+          <div class="profile-section" data-aos="fade-right">
+            <div class="profile-wrapper">
+              <div class="profile-glow"></div>
+              <div class="profile-frame"></div>
+              <div class="profile-scanner"></div>
+              <img
+                src="/raminda-kariyawasam/Avatar.jpg"
+                alt="Raminda Kariyawasam"
+                class="profile-image"
+              />
+            </div>
+          </div>
+
+          <div class="info-section" data-aos="fade-up">
+          <div class="bio-section1">
+            <h1 class="section-title">About Me</h1>
+            <p class="bio">
+              Reliable and motivated software engineering student with strong
+              expertise in full-stack development, mobile applications, and IoT
+              systems. Passionate about developing applications and
+              problem-solving.
+            </p>
+          </div>
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-container">
+              <div class="skill-category">
+                <h3 class="category-title">Frontend Development</h3>
+                <div class="skills-grid">
+                  <div class="skill-tag">React</div>
+                  <div class="skill-tag">Angular</div>
+                  <div class="skill-tag">JavaScript</div>
+                  <div class="skill-tag">Flutter</div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="category-title">Backend Development</h3>
+                <div class="skills-grid">
+                  <div class="skill-tag">Node.js</div>
+                  <div class="skill-tag">Express.js</div>
+                  <div class="skill-tag">PHP</div>
+                  <div class="skill-tag">Java</div>
+                  <div class="skill-tag">.NET</div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="category-title">Design & Creative</h3>
+                <div class="skills-grid">
+                  <div class="skill-tag">Figma</div>
+                  <div class="skill-tag">Adobe Suite</div>
+                  <div class="skill-tag">Graphic Design</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="info-section" data-aos="fade-left">
-          <h1 class="section-title">About Me</h1>
-          <p class="bio">
-            Reliable and motivated software engineering student with strong
-            expertise in full-stack development, mobile applications, and IoT
-            systems. Passionate about developing applications and
-            problem-solving.
-          </p>
+        <div class="right-column">
+          <div class="info-section" data-aos="fade-left">
+          <div class="bio-section">
+            <h1 class="section-title">About Me</h1>
+            <p class="bio">
+              Reliable and motivated software engineering student with strong
+              expertise in full-stack development, mobile applications, and IoT
+              systems. Passionate about developing applications and
+              problem-solving.
+            </p>
+            </div>
 
-          <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-container">
+              <div class="skill-category">
+                <h3 class="category-title">Database & Cloud</h3>
+                <div class="skills-grid">
+                  <div class="skill-tag">SQL</div>
+                  <div class="skill-tag">MongoDB</div>
+                  <div class="skill-tag">Firebase</div>
+                  <div class="skill-tag">GCP</div>
+                  <div class="skill-tag">AWS</div>
+                </div>
+              </div>
 
-          <div class="skills-container">
-            <div class="skill-category">
-              <h3 class="category-title">Frontend Development</h3>
-              <div class="skills-grid">
-                <div class="skill-tag">React</div>
-                <div class="skill-tag">Angular</div>
-                <div class="skill-tag">JavaScript</div>
-                <div class="skill-tag">Flutter</div>
+              <div class="skill-category">
+                <h3 class="category-title">Development Tools</h3>
+                <div class="skills-grid">
+                  <div class="skill-tag">Git</div>
+                  <div class="skill-tag">Docker</div>
+                  <div class="skill-tag">Postman</div>
+                  <div class="skill-tag">VS Code</div>
+                  <div class="skill-tag">Visual Studio</div>
+                  <div class="skill-tag">Eclipse</div>
+                  <div class="skill-tag">Android Studio</div>
+                </div>
+              </div>
+
+              <div class="skill-category">
+                <h3 class="category-title">Additional Skills</h3>
+                <div class="skills-grid">
+                  <div class="skill-tag">IoT Development</div>
+                  <div class="skill-tag">English</div>
+                  <div class="skill-tag">Sinhala</div>
+                </div>
               </div>
             </div>
 
-            <div class="skill-category">
-              <h3 class="category-title">Backend Development</h3>
-              <div class="skills-grid">
-                <div class="skill-tag">Node.js</div>
-                <div class="skill-tag">Express.js</div>
-                <div class="skill-tag">PHP</div>
-                <div class="skill-tag">Java</div>
-                <div class="skill-tag">.NET</div>
-              </div>
-            </div>
+            <h2 class="section-title">Education</h2>
+            <ul class="education-list">
+              <li class="education-item">
+                BSc (Hons) in Software Engineering<br />
+                Plymouth University, UK (Affiliated by NSBM University)<br />
+                2021 - Present
+              </li>
+              <li class="education-item">
+                IT Foundation Program<br />
+                NSBM University, Sri Lanka<br />
+                2020 – 2021
+              </li>
+              <li class="education-item">
+                G.C.E. Ordinary Levels<br />
+                Royal Institute International School<br />
+                2015 - 2019
+              </li>
+            </ul>
 
-            <div class="skill-category">
-              <h3 class="category-title">Database & Cloud</h3>
-              <div class="skills-grid">
-                <div class="skill-tag">SQL</div>
-                <div class="skill-tag">MongoDB</div>
-                <div class="skill-tag">Firebase</div>
-                <div class="skill-tag">GCP</div>
-                <div class="skill-tag">AWS</div>
-              </div>
-            </div>
-
-            <div class="skill-category">
-              <h3 class="category-title">Development Tools</h3>
-              <div class="skills-grid">
-                <div class="skill-tag">Git</div>
-                <div class="skill-tag">Docker</div>
-                <div class="skill-tag">Postman</div>
-                <div class="skill-tag">VS Code</div>
-                <div class="skill-tag">Visual Studio</div>
-                <div class="skill-tag">Eclipse</div>
-                <div class="skill-tag">Android Studio</div>
-              </div>
-            </div>
-
-            <div class="skill-category">
-              <h3 class="category-title">Design & Creative</h3>
-              <div class="skills-grid">
-                <div class="skill-tag">Figma</div>
-                <div class="skill-tag">Adobe Suite</div>
-                <div class="skill-tag">Graphic Design</div>
-              </div>
-            </div>
-
-            <div class="skill-category">
-              <h3 class="category-title">Other Skills</h3>
-              <div class="skills-grid">
-                <div class="skill-tag">IoT Development</div>
-                <div class="skill-tag">English</div>
-                <div class="skill-tag">Sinhala</div>
-              </div>
-            </div>
-          </div>
-
-          <h2 class="section-title">Education</h2>
-          <ul class="education-list">
-            <li class="education-item">
-              BSc (Hons) in Software Engineering<br />
-              Plymouth University, UK (Affiliated by NSBM University)<br />
-              2021 - Present
-            </li>
-            <li class="education-item">
-              IT Foundation Program<br />
-              NSBM University, Sri Lanka<br />
-              2020 – 2021
-            </li>
-            <li class="education-item">
-              G.C.E. Ordinary Levels<br />
-              Royal Institute International School<br />
-              2015 - 2019
-            </li>
-          </ul>
-
-          <h2 class="section-title">Contact</h2>
-          <div class="contact-info">
-            <a href="mailto:raminda5575@gmail.com" class="contact-item">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+              <a href="mailto:raminda5575@gmail.com" class="contact-item">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                  ></path>
+                </svg>
+                raminda5575@gmail.com
+              </a>
+              <a href="tel:+94758702922" class="contact-item">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"
+                  ></path>
+                </svg>
+                +94 75-870 29 22
+              </a>
+              <a
+                href="https://linkedin.com/in/raminda-dulmin"
+                class="contact-item"
+                target="_blank"
               >
-                <path
-                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-                ></path>
-              </svg>
-              raminda5575@gmail.com
-            </a>
-            <a href="tel:+94758702922" class="contact-item">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"
+                  ></path>
+                </svg>
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/KADRDulmin"
+                class="contact-item"
+                target="_blank"
               >
-                <path
-                  d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"
-                ></path>
-              </svg>
-              +94 75-870 29 22
-            </a>
-            <a
-              href="https://linkedin.com/in/raminda-dulmin"
-              class="contact-item"
-              target="_blank"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"
-                ></path>
-              </svg>
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/KADRDulmin"
-              class="contact-item"
-              target="_blank"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path
-                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-                ></path>
-              </svg>
-              GitHub
-            </a>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  ></path>
+                </svg>
+                GitHub
+              </a>
+            </div>
           </div>
         </div>
       </div>
