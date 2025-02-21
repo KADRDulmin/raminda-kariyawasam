@@ -223,27 +223,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
       }
 
-      .education-list {
-        list-style: none;
-        padding: 0;
-        margin: 2rem 0;
-      }
-
-      .education-item {
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(0, 255, 255, 0.2);
-        padding: 1.5rem;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
-      }
-
-      .education-item:hover {
-        transform: translateX(10px);
-        border-color: var(--accent);
-        box-shadow: -5px 5px 20px rgba(0, 255, 255, 0.1);
-      }
-
       .bio-section1 {
         display: none;
       }
@@ -513,6 +492,122 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
           padding: 1.5rem;
         }
       }
+
+      /* Updated Education Section Styles */
+      .education-section {
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 16px;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(0, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .education-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .education-item {
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(0, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.8rem;
+        position: relative;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      .education-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--accent);
+        opacity: 0.5;
+        transition: all 0.3s ease;
+      }
+
+      .education-item:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+      }
+
+      .education-item:hover::before {
+        opacity: 1;
+        box-shadow: 0 0 15px var(--accent);
+      }
+
+      .education-year {
+        font-size: 0.9rem;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        padding: 0.3rem 1rem;
+        background: rgba(0, 255, 255, 0.1);
+        border-radius: 20px;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+      }
+
+      .education-degree {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff;
+        margin: 0.5rem 0;
+        position: relative;
+        display: inline-block;
+      }
+
+      .education-school {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+
+      .education-school::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+
+      .education-item::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(0, 255, 255, 0.1),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .education-item:hover::after {
+        transform: translateX(100%);
+      }
+
+      @media (max-width: 768px) {
+        .education-list {
+          grid-template-columns: 1fr;
+        }
+
+        .education-item {
+          padding: 1.5rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -626,23 +721,25 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
             </div>
 
             <h2 class="section-title">Education</h2>
-            <ul class="education-list">
-              <li class="education-item">
-                BSc (Hons) in Software Engineering<br />
-                Plymouth University, UK (Affiliated by NSBM University)<br />
-                2021 - Present
-              </li>
-              <li class="education-item">
-                IT Foundation Program<br />
-                NSBM University, Sri Lanka<br />
-                2020 – 2021
-              </li>
-              <li class="education-item">
-                G.C.E. Ordinary Levels<br />
-                Royal Institute International School<br />
-                2015 - 2019
-              </li>
-            </ul>
+            <div class="education-section">
+              <ul class="education-list">
+                <li class="education-item">
+                  <span class="education-year">2021 - Present</span>
+                  <h3 class="education-degree">BSc (Hons) in Software Engineering</h3>
+                  <p class="education-school">Plymouth University, UK (Affiliated by NSBM University)</p>
+                </li>
+                <li class="education-item">
+                  <span class="education-year">2020 - 2021</span>
+                  <h3 class="education-degree">IT Foundation Program</h3>
+                  <p class="education-school">NSBM University, Sri Lanka</p>
+                </li>
+                <li class="education-item">
+                  <span class="education-year">2015 - 2019</span>
+                  <h3 class="education-degree">G.C.E. Ordinary Levels</h3>
+                  <p class="education-school">Royal Institute International School</p>
+                </li>
+              </ul>
+            </div>
 
             <h2 class="section-title">Contact</h2>
             <div class="contact-section">
