@@ -41,17 +41,19 @@ import { SITE_TITLE } from "../consts";
     border-bottom: var(--glass-border);
     width: 100%;
     box-sizing: border-box;
+    height: 70px; /* Fixed height for consistency */
   }
 
   .nav-container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 1rem var(--container-padding);
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     width: 100%;
+    height: 100%;
   }
 
   /* Logo Styles */
@@ -173,11 +175,13 @@ import { SITE_TITLE } from "../consts";
   @media (max-width: 768px) {
     .mobile-nav-toggle {
       display: block;
+      margin-right: -0.5rem;
+      padding: 1rem;
     }
 
     .nav-container {
+      padding: 0 1rem;
       background: rgba(0, 0, 0, 0.95);
-      backdrop-filter: blur(10px);
     }
 
     .logo-text {
@@ -187,22 +191,22 @@ import { SITE_TITLE } from "../consts";
     .nav-links {
       display: none;
       position: fixed;
-      top: var(--header-height);
+      top: 70px; /* Match header height */
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.98);
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       flex-direction: column;
-      padding: 2rem var(--container-padding);
-      gap: 1.5rem;
+      padding: 1rem;
+      gap: 0.5rem;
       border-top: 1px solid var(--accent);
       opacity: 0;
       visibility: hidden;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-      z-index: 999;
+      z-index: 9998;
     }
 
     .nav-links[data-visible="true"] {
@@ -213,13 +217,20 @@ import { SITE_TITLE } from "../consts";
 
     .nav-links a {
       font-size: 1.4rem;
-      padding: 1.2rem;
+      padding: 1rem;
       width: 100%;
       text-align: center;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.8);
       border: 1px solid rgba(0, 255, 255, 0.2);
-      margin: 0.3rem 0;
+      margin: 0;
       transition: all 0.3s ease;
+      border-radius: 8px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links a:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 255, 255, 0.1);
     }
 
     .nav-links a:hover {
@@ -231,10 +242,11 @@ import { SITE_TITLE } from "../consts";
     .cta-button {
       background: var(--accent) !important;
       border: none !important;
-      margin-top: 1rem !important;
+      margin: 1rem 0 0 0 !important;
       font-weight: 600;
       letter-spacing: 1px;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      padding: 1rem !important;
     }
 
     /* Enhanced hamburger animation */
@@ -302,16 +314,16 @@ import { SITE_TITLE } from "../consts";
     }
 
     .logo-text {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
 
     .nav-links {
-      padding: 1.5rem 1rem;
+      padding: 1rem;
     }
 
     .nav-links a {
-      font-size: 1.2rem;
-      padding: 1rem;
+      font-size: 1rem;
+      padding: 0.875rem;
     }
   }
 </style>
@@ -349,11 +361,11 @@ import { SITE_TITLE } from "../consts";
   // Add touch feedback
   document.querySelectorAll(".nav-links a").forEach((link) => {
     link.addEventListener("touchstart", () => {
-      link.style.transform = "scale(0.98)";
+      (link as HTMLElement).style.transform = "scale(0.98)";
     });
 
     link.addEventListener("touchend", () => {
-      link.style.transform = "scale(1)";
+      (link as HTMLElement).style.transform = "scale(1)";
     });
   });
 </script>
