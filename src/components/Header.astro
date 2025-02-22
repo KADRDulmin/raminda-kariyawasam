@@ -1,6 +1,7 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../consts";
+import ContactPopup from "./ContactPopup";
 ---
 
 <header class="header-nav">
@@ -27,6 +28,8 @@ import { SITE_TITLE } from "../consts";
     </div>
   </nav>
 </header>
+
+<ContactPopup client:load />
 
 <style>
   /* Header Layout */
@@ -329,6 +332,8 @@ import { SITE_TITLE } from "../consts";
 </style>
 
 <script>
+  import { openContactPopup } from "../stores/popupStore";
+
   function setupMobileNav() {
     const navToggle = document.querySelector(".mobile-nav-toggle");
     const primaryNav = document.querySelector("#primary-navigation");
@@ -352,11 +357,25 @@ import { SITE_TITLE } from "../consts";
     navToggle?.addEventListener("click", toggleNav);
   }
 
+  function setupContactButton() {
+    const contactButton = document.querySelector('a[href="#contact"]');
+    if (contactButton) {
+      contactButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        openContactPopup();
+      });
+    }
+  }
+
   // Run setup on initial load
   setupMobileNav();
+  setupContactButton();
 
   // Re-run setup when navigating between pages
-  document.addEventListener("astro:page-load", setupMobileNav);
+  document.addEventListener("astro:page-load", () => {
+    setupMobileNav();
+    setupContactButton();
+  });
 
   // Add touch feedback
   document.querySelectorAll(".nav-links a").forEach((link) => {
