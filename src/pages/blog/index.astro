@@ -17,107 +17,118 @@ const posts = (await getCollection("blog")).sort(
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     <style>
       :root {
-      --accent: #0ff;
-      --accent-dark:rgb(0, 173, 204);
-      --glass-background: rgba(0, 191, 255, 0.1);
-      --glass-border: 1px solid rgba(0, 213, 255, 0.2);
-      --neon-glow: 0 0 10px rgba(0, 170, 255, 0.5);
+        --accent: #0ff;
+        --accent-dark: rgb(0, 173, 204);
+        --glass-background: rgba(0, 191, 255, 0.1);
+        --glass-border: 1px solid rgba(0, 213, 255, 0.2);
+        --neon-glow: 0 0 10px rgba(0, 170, 255, 0.5);
       }
 
       body {
-      background: linear-gradient(45deg, #000, #111);
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
+        background: linear-gradient(45deg, #000, #111);
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
       }
 
       main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: clamp(60px, 8vw, 80px) 20px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: clamp(60px, 8vw, 80px) 20px 20px;
       }
 
       ul {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-      gap: clamp(1rem, 3vw, 2rem);
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: clamp(1rem, 3vw, 2rem);
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
       }
 
       ul li {
-      width: 100%;
-      background: var(--glass-background);
-      border-radius: 12px;
-      border: var(--glass-border);
-      box-shadow: var(--neon-glow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      backdrop-filter: blur(10px);
+        width: 100%;
+        background: var(--glass-background);
+        border-radius: 12px;
+        border: var(--glass-border);
+        box-shadow: var(--neon-glow);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        backdrop-filter: blur(10px);
       }
 
       ul li:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 0 30px var(--accent);
+        transform: translateY(-5px) scale(1.02);
+        box-shadow:
+          0 0 20px var(--accent),
+          0 0 40px var(--accent),
+          inset 0 0 15px rgba(0, 255, 255, 0.3);
+        border-color: var(--accent);
       }
 
       ul li * {
-      text-decoration: none;
-      transition: all 0.3s ease;
+        text-decoration: none;
+        transition: all 0.3s ease;
       }
 
       ul li:first-child {
-      grid-column: 1 / -1;
+        grid-column: 1 / -1;
       }
 
       ul li img {
-      width: 100%;
-      height: clamp(200px, 30vw, 300px);
-      object-fit: cover;
-      border-radius: 12px 12px 0 0;
-      margin-bottom: 1rem;
-      border-bottom: var(--glass-border);
+        width: 100%;
+        height: clamp(200px, 30vw, 300px);
+        object-fit: cover;
+        border-radius: 12px 12px 0 0;
+        margin-bottom: 1rem;
+        border-bottom: var(--glass-border);
+        transition: border-color 0.3s ease;
+      }
+
+      ul li:hover img {
+        border-color: var(--accent);
       }
 
       ul li:first-child img {
-      height: clamp(250px, 40vw, 400px);
+        height: clamp(250px, 40vw, 400px);
       }
 
       ul li a {
-      display: block;
-      padding: 1rem;
+        display: block;
+        padding: 1rem;
       }
 
       .title {
-      margin: 0 0 0.5rem 0;
-      color: var(--accent);
-      line-height: 1.2;
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      text-shadow: 0 0 5px var(--accent);
-      letter-spacing: 1px;
+        margin: 0 0 0.5rem 0;
+        color: var(--accent);
+        line-height: 1.2;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        text-shadow: 0 0 5px var(--accent);
+        letter-spacing: 1px;
       }
 
       ul li:first-child .title {
-      font-size: clamp(1.5rem, 3vw, 2rem);
+        font-size: clamp(1.5rem, 3vw, 2rem);
       }
 
       .date {
-      margin: 0;
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.9rem;
-      text-transform: uppercase;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        text-transform: uppercase;
       }
 
       ul li a:hover h4,
       ul li a:hover .date {
-      color: var(--accent);
-      text-shadow: 0 0 15px var(--accent);
-      transform: translateX(5px);
+        color: var(--accent);
+        text-shadow: 0 0 15px var(--accent);
+        transform: translateX(5px);
       }
 
       @media (max-width: 768px) {
-      ul {
-        gap: 1.5rem;
-      }
+        ul {
+          gap: 1.5rem;
+        }
       }
     </style>
   </head>
